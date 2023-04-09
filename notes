@@ -1,0 +1,85 @@
+A block is mined based on its key which comprises of the following properties:
+
+index: The current index of the block in the blockchain.
+previousHash: The hash of the previous block in the blockchain.
+hash: The current hash of the block.
+nonce: The magic number which is incremented to find the secret hash which is used to sign the block.
+transactions: A list of transactions added to the block
+
+Minting
+This is a well-known term in blockchain development, it simply refers to the act of adding more coins, or printing more money to be simple. When the chain gives miners reward, it is actually minting coins in the mean time.
+
+Signing
+will use an algorithm used by Bitcoin and Ethereum - secp256k1 for generating key pairs. we wouldn't want to implement the algorithm on our own since it's terribly long We are using a package called elliptic, note that elliptic also supports Curve25519 and other algorithms.
+
+Validation
+The chain is valid when all blocks have valid transactions, transactions are valid only when:
+From, to, amount are not empty.
+Sender's address has more money than the amount sent.
+The signature matches with the data of the transaction.
+
+minting refers to act of adding more coins, it simply means adding more money to be simple, when the chain gives miner rewards,it is actually minting coins
+
+Two parties (Alice and Bob) might use public-key encryption as follows: First, Alice generates a public/private key pair. If Bob wants to send Alice an encrypted message, he asks her for her public key. Alice sends Bob her public key over a nonsecure network, and Bob uses this key to encrypt a message. Bob sends the encrypted message to Alice, and she decrypts it by using her private key. If Bob received Alice's key over a nonsecure channel, such as a public network, Bob is open to a man-in-the-middle attack. Therefore, Bob must verify with Alice that he has a correct copy of her public key.
+
+these cryptcurrency wallets dont contain actual cryptocurrency, instead they  contain two keys private and public key
+public key is long string of chracters that makes up wallet address that anyone can use to send cryptocurrency into,
+to verify the transaction and u are owner of currency you unlock the transactions using private key
+public key is used to send cryptocurrency into wallet and private key is used to verify transactions
+public key is used to encyrpt transactions and private key is used for both encyrption and decryption 
+you can generate as many public keys from pirvate key but reverse is not true
+
+Minting is the process of creating physical coins which are used as an exchange of value. In technical terms, minting is validating
+transactions, producing new blocks, and storing information on the blockchain corresponding to the coin number. 
+
+There is also a kind of miner's reward called gas fee, but it's a little different. It's basically user's reward for miners. 
+This makes mining more appealing to miners, and it also pays for the energy used for mining, and people would have to pay a higher 
+gas fee to be picked by miners quicker.
+
+we would need a network where nodes can connect with ans send message to each other in peer to peer fashion,
+after we will add functionlaties like broadcasting transactions, send the chain and chain information
+
+web socket- it is tcp based protocol
+---HTTP and WebSocket both are communication protocols used in client-server communication. 
+--HTTP is unidirectional where the client sends the request and the server sends the response.
+HTTP is a stateless protocol that runs on top of TCP which is a connection-oriented protocol it guarantees the 
+delivery of data packet transfer
+HTTP message information encoded in ASCII
+
+https://www.geeksforgeeks.org/what-is-web-socket-and-how-it-is-different-from-the-http/
+WebSocket is bidirectional, a full-duplex protocol that is used in the same scenario of client-server communication
+unlike HTTP it starts from ws:// or wss://.It is a stateful protocol, which means the connection between client
+and server will keep alive until it is terminated by either party (client or server).
+After closing the connection by either of the client and server, the connection is terminated from both ends. 
+
+A WebSocket is a standard bidirectional TCP socket between the client and the server.
+The socket starts out as a HTTP connection and then "Upgrades" to a TCP socket after a HTTP handshake. After the 
+handshake, either side can send data.
+ 
+--working of websocket
+https://javascript.info/websocket
+let socket = new WebSocket("ws://javascript.info");
+The wss:// protocol is not only encrypted, but also more reliable.
+
+That's because ws:// data is not encrypted,visible for any intermediary.Old proxy servers do not know about WebSocket,
+they may see “strange” headers and abort the connection.
+Transport Layer Securities (TLS) are designed to provide security at the transport layer.
+
+On the other hand, wss:// is WebSocket over TLS, (same as HTTPS is HTTP over TLS), the transport security layer
+encrypts the data at the sender and decrypts it at the receiver. So data packets are passed encrypted through proxies. 
+They cant see whats inside and let them through.
+
+open - connection established,
+message - data received,
+error - websocket error,
+close - connection close
+
+handshake is the process where u send address to others to say plz connect to this address
+1st thing we will do is to connectt to that address and send him/her our address and so that they
+should be able to connect back
+
+handling a message
+{
+    type:"TYPE_HANDSHAKE",
+    data:[...(some address),...]
+}
